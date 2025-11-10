@@ -7,15 +7,15 @@
     "packages/agents/*",
     "packages/agents/**"
   ],
+  
   "scripts": {
-    "build": "tsc -b",
-    "dev:planner": "ts-node packages/agents/planner/index.ts",
-    "dev:analyzer": "ts-node packages/agents/static-analyzer/index.ts",
-    "dev:proposer": "ts-node packages/agents/proposer/index.ts",
-    "dev:reviewer": "ts-node packages/agents/reviewer/index.ts",
-    "dev:executor": "ts-node packages/agents/executor/index.ts",
+    "dev:planner":  "ts-node --transpile-only packages/agents/planner/index.ts",
+    "dev:analyzer": "ts-node --transpile-only packages/agents/static-analyzer/index.ts",
+    "dev:proposer": "ts-node --transpile-only packages/agents/proposer/index.ts",
+    "dev:reviewer": "ts-node --transpile-only packages/agents/reviewer/index.ts",
+    "dev:executor": "ts-node --transpile-only packages/agents/executor/index.ts",
     "dev:all": "run-p dev:*",
-    "run": "ts-node packages/scripts/cli.ts"
+    "run": "ts-node --transpile-only packages/scripts/cli.ts"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",

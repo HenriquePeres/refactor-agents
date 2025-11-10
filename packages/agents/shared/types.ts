@@ -16,7 +16,7 @@ export interface Proposal {
 }
 
 export interface ExecutionReport {
-  build: "passed" | "failed" | "skipped"; // <— inclua "skipped"
+  build: "passed" | "failed" | "skipped"; 
   tests: { passed: number; failed: number };
   lint?: { errors_before?: number; errors_after?: number };
   metrics_delta?: Record<string, number>;
