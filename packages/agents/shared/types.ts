@@ -33,3 +33,11 @@ export interface Msg<T = unknown> {
   payload?: T;
   created_at: string;
 }
+
+
+// >>> NOVO: payload do Reviewer → Executor
+export interface ReviewerDecisionPayload {
+  changedLines: number;
+  reason: string;
+  proposal: Proposal;
+}

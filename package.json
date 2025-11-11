@@ -7,9 +7,8 @@
     "packages/agents/*",
     "packages/agents/**"
   ],
-  
   "scripts": {
-    "dev:planner":  "ts-node --transpile-only packages/agents/planner/index.ts",
+    "dev:planner": "ts-node --transpile-only packages/agents/planner/index.ts",
     "dev:analyzer": "ts-node --transpile-only packages/agents/static-analyzer/index.ts",
     "dev:proposer": "ts-node --transpile-only packages/agents/proposer/index.ts",
     "dev:reviewer": "ts-node --transpile-only packages/agents/reviewer/index.ts",
@@ -24,6 +23,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "execa": "5.1.1",
     "ioredis": "^5.4.1",
     "simple-git": "^3.24.0"
   }

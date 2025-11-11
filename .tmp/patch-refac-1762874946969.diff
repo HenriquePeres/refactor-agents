@@ -1,0 +1,16 @@
+diff --git a/src/app/services/user.service.ts b/src/app/services/user.service.ts
+index 0000001..0000002 100644
+--- a/src/app/services/user.service.ts
++++ b/src/app/services/user.service.ts
+@@ -1,5 +1,9 @@
+ export function example(a: number, b: number) {
+-  const sum = a + b;
+-  return sum;
++  // refactor: extracted inner logic (synthetic)
++  const sum = computeSum(a, b);
++  return sum;
+ }
++
++function computeSum(a: number, b: number) {
++  return a + b;
++}

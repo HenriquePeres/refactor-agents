@@ -10,7 +10,7 @@ async function main() {
     task_id: TASK_ID,
     sender: "planner",
     context: {
-      repo: process.env.TARGET_REPO_SSH || "git@github.com:org/projeto.git",
+      repo: process.env.TARGET_REPO_SSH || "git@github.com:HenriquePeres/refactor-agents-sandbox.git",
       branch: process.env.TARGET_BASE_BRANCH || "main",
       language: "TypeScript",
       targets: ["src/app/services/user.service.ts"] // ajuste para o projeto real
