@@ -9,12 +9,16 @@ async function main() {
     intent: "REQUEST",
     task_id: TASK_ID,
     sender: "planner",
+    // packages/agents/planner/index.ts
     context: {
-      repo: process.env.TARGET_REPO_SSH || "git@github.com:HenriquePeres/refactor-agents-sandbox.git",
-      branch: process.env.TARGET_BASE_BRANCH || "main",
+      repo: "https://github.com/HenriquePeres/refactor-agents-sandbox",
+      branch: "main",
       language: "TypeScript",
-      targets: ["src/app/services/user.service.ts"] // ajuste para o projeto real
+      // escolha um arquivo real do repo:
+      targets: ["../refactor-agents-sandbox/src/app/services/user.service.ts"] 
+      // ou: ["packages/agents/shared/llm.ts"]
     },
+
     created_at: nowISO()
   };
   await enqueue("static-analyzer", msg);
