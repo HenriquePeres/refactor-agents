@@ -3,23 +3,34 @@ import { consume, enqueue } from "../shared/queue";
 import { Msg } from "../shared/types";
 import { log } from "../shared/logger";
 import { runEslint } from "./eslintRunner";
+import { analyzeFile } from "./analyzeFile";
 
 async function handler(msg: Msg) {
-  log("static-analyzer", "received message from queue", {
+  log("static-analyzer", "received", {
     task_id: msg.task_id,
-    from: msg.sender,
-    intent: msg.intent,
-    context: msg.context,
+    targets: msg.context.targets,
   });
 
-  const eslint = await runEslint(msg.context.targets);
-  const metrics = { cyclomatic: 18, loc: 420 }; // stub; integrar métrica real depois
+  const targetFile = msg.context.targets[0];
 
-  const evidence = { eslint, metrics };
+  // 1. Rodar ESLint real
+  const eslintSummary = await runEslint([targetFile]);
 
-  log("static-analyzer", "computed evidence", {
-    task_id: msg.task_id,
-    evidence,
+  // 2. Rodar métricas reais
+  const { metrics, hotspots } = analyzeFile(targetFile);
+
+  // 3. Construir perfil de problemas
+  const problemProfile = {
+    eslintErrors: eslintSummary.totalErrors,
+    eslintWarnings: eslintSummary.totalWarnings,
+    mostCommonRules: eslintSummary.mostCommonRules,
+    hotspotReasons: hotspots.map(h => h.reason),
+  };
+
+  log("static-analyzer", "computed metrics & hotspots", {
+    metrics,
+    hotspots,
+    problemProfile,
   });
 
   const out: Msg = {
@@ -27,19 +38,20 @@ async function handler(msg: Msg) {
     task_id: msg.task_id,
     sender: "static-analyzer",
     context: msg.context,
-    evidence,
+    evidence: {
+      eslint: eslintSummary,
+      metrics,
+      hotspots,
+      problemProfile,
+    },
     created_at: new Date().toISOString(),
   };
 
-  log("static-analyzer", "sending INFORM to proposer", {
-    task_id: out.task_id,
-    evidenceSummary: {
-      targets: msg.context.targets,
-      eslintTargets: msg.context.targets.length,
-    },
-  });
-
   await enqueue("proposer", out);
+
+  log("static-analyzer", "sent INFORM to proposer", {
+    task_id: msg.task_id,
+  });
 }
 
 consume("static-analyzer", handler);

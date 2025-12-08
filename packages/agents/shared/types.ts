@@ -35,9 +35,15 @@ export interface Msg<T = unknown> {
 }
 
 
-// >>> NOVO: payload do Reviewer → Executor
+// Adapta para o que você já tem, mantendo os campos antigos
 export interface ReviewerDecisionPayload {
   changedLines: number;
   reason: string;
+
+  // NOVOS CAMPOS (opcionais, não quebram quem já consome)
+  severity?: "low" | "medium" | "high" | "unknown";
+  maxAllowedChangedLines?: number;
+  metricsSnapshot?: unknown;
+
   proposal: Proposal;
 }
