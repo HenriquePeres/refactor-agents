@@ -21,7 +21,7 @@ Certifique-se de ter os seguintes componentes instalados:
 
 ## Acessos necessários
 
-- Chave de API da OpenAI (para o PFP, a chave vai ser passada por um bloco de notas)
+- Chave de API da OpenAI (para o PFP, a chave da LLM vai estar escrita no documento "Informações_PFP_Henrique_Peres.pdf", passado no ead)
 - Configuração de SSH para o GitHub
 - Token do GitHub com permissão repo
 - Permissão de escrita no repositório sandbox (veja abaixo)
@@ -33,13 +33,6 @@ Certifique-se de ter os seguintes componentes instalados:
 2. Adicione essa pessoa em GitHub → refactor-agents-sandbox → Settings → Collaborators → Add people
 
 3. Conceda a permissão Write
-
-src/app/services/
-   ├── math-utils-simple.ts
-   ├── user-score.service.ts
-   ├── legacy-export.service.ts
-   ├── feature-flags.service.ts
-   ├── report.service.ts
 
 ## Variáveis de ambiente
 
