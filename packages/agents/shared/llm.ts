@@ -1,5 +1,15 @@
 // packages/agents/shared/llm.ts
 //import "cross-fetch/polyfill";
+import dotenv from "dotenv";
+import path from "path";
+
+// garante que o .env da raiz será carregado
+dotenv.config({
+  path: path.resolve(process.cwd(), ".env"),
+});
+
+
+console.log("ENV loaded:", process.env.LLM_API_KEY ? "OK" : "MISSING");
 
 export interface RefactorRequest {
   filePath: string;        // caminho RELATIVO ao repo (ex: src/app/services/user.service.ts)
@@ -16,7 +26,7 @@ export interface RefactorRequest {
  */
 const API_URL = process.env.LLM_API_URL ?? "https://api.openai.com/v1/chat/completions";
 
-const API_KEY = "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";
+const API_KEY = process.env.LLM_API_KEY
 
 const MODEL = "gpt-5.1";
 /*
@@ -42,25 +52,20 @@ REGRAS GERAIS:
    - Se o código lida apenas com números, não crie entidades como "User", "Order", etc.
    - Use apenas abstrações coerentes com o que já está presente.
 
-2. Preserve a API pública:
-   - Não altere nomes, parâmetros, tipo de retorno ou contratos de funções exportadas/public.
-   - Não remova funções exportadas existentes.
-   - Não adicione novos pontos de entrada públicos (novas funções exportadas) sem necessidade.
-
-3. Comportamento:
+2. Comportamento:
    - A refatoração deve produzir exatamente o mesmo resultado para as mesmas entradas.
    - Não adicione validações, logs, exceções ou efeitos colaterais novos.
 
-4. Refatoração ideal:
+3. Refatoração ideal:
    - Você PODE e DEVE:
      * Renomear variáveis, parâmetros e funções internas para deixar mais claro.
      * Extrair funções ou métodos privados para reduzir duplicação ou complexidade.
-     * Introduzir classes/objetos internos se isso melhorar o design, desde que a API pública não mude.
+     * Introduzir classes/objetos internos se isso melhorar o design.
      * Reorganizar o código para melhorar legibilidade e manutenibilidade.
    - Mantenha a refatoração focada no que traz ganho real de clareza/qualidade.
    - Evite mudanças cosméticas excessivas sem ganho de clareza.
 
-5. Formato da resposta:
+4. Formato da resposta:
    - Responda APENAS com um diff unificado que possa ser aplicado com \`git apply\`.
    - Use cabeçalhos no formato:
      --- a/${filePath}

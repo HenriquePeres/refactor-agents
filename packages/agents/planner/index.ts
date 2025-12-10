@@ -16,7 +16,7 @@ async function main() {
       branch: "main",
       language: "TypeScript",
       // ATENÇÃO: aqui entra o(s) arquivo(s) que o usuário quer refatorar
-      targets: ["../refactor-agents-sandbox/src/app/services/user.service.ts"],
+      targets: ["../refactor-agents-sandbox/src/app/services/legacy-export.service.ts"],
     },
     created_at: nowISO(),
   };
