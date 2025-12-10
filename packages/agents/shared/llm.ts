@@ -29,14 +29,7 @@ const API_URL = process.env.LLM_API_URL ?? "https://api.openai.com/v1/chat/compl
 const API_KEY = process.env.LLM_API_KEY
 
 const MODEL = "gpt-5.1";
-/*
-if (!API_KEY || API_KEY === "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") {
-  // Se quiser, pode comentar este throw depois de configurar a chave
-  throw new Error(
-    "API_KEY não configurada em shared/llm.ts"
-  );
-}
-*/
+
 
 export async function generateRefactorDiff(req: RefactorRequest): Promise<string> {
   const { filePath, code, instructions, eslint, metrics } = req;

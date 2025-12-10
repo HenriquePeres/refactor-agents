@@ -21,7 +21,7 @@ Certifique-se de ter os seguintes componentes instalados:
 
 ## Acessos necessários
 
-- Chave de API da OpenAI
+- Chave de API da OpenAI (para o PFP, a chave vai ser passada por um bloco de notas)
 - Configuração de SSH para o GitHub
 - Token do GitHub com permissão repo
 - Permissão de escrita no repositório sandbox (veja abaixo)
