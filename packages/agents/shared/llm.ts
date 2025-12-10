@@ -8,9 +8,6 @@ dotenv.config({
   path: path.resolve(process.cwd(), ".env"),
 });
 
-
-console.log("ENV loaded:", process.env.LLM_API_KEY ? "OK" : "MISSING");
-
 export interface RefactorRequest {
   filePath: string;        // caminho RELATIVO ao repo (ex: src/app/services/user.service.ts)
   code: string;            // código original do arquivo
